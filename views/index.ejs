@@ -1,0 +1,55 @@
+<%- include('partial/head.ejs') %> 
+
+    <div class="container mt-5">
+        <% if(notif_status == 'suksesedit') {%> 
+            <%- include('partial/message-edit.ejs') %>
+        <% } else if(notif_status == "suksesditambahkan") {%> 
+            <%- include('partial/message-add.ejs') %>
+        <% } else if(notif_status == "berhasildihapus") {%>
+            <%- include('partial/message-delete.ejs') %>
+        <% } %>     
+        <div style="display: grid; justify-content: center;">
+             <h1>Data Pribadi</h1>
+             <a href="/add" class="btn btn-primary">Add</a>
+        </div>
+        <table class="table">
+			<thead clsas="txt-center">
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Title</th>
+					<th scope="col">Country</th>
+                    <th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% data.forEach(d => { %>
+					<tr>
+						<th scope="row"><%= d.ID %></th>
+						<td><%= d.Title %></td>
+						<td><%= d.Country %></td>
+                        <td>
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-3">
+                                    <a href="/edit/<%= d.ID %>" style="color: white">   
+                                             <button type="button" class="btn btn-success">     
+                                                         Edit       
+                                             </button>    
+                                    </a>
+                                </div>
+                                <div class="col-3">
+                                    <a  href="/delete/<%= d.ID %>" style="color: white" onclick="return confirm('Delete ?')">
+                                    <button type="button" class="btn btn-danger">
+                                         Delete
+                                    </button>
+                                </a>
+                                </div>
+                                <div class="col-3"></div>
+
+                            </div>
+                        </td>
+					</tr>
+				<% }) %>
+			</tbody>
+		</table>
+	</div>
